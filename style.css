@@ -1,0 +1,53 @@
+.main-container{
+    height: 100%;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calc{
+    width: 410px;
+    height: 600px;
+    background-color: rgb(123, 123, 123);
+    padding: 10px 10px;
+    display: grid;
+    grid-template-areas: 
+    "i i i i i"
+    "one two three times division"
+    "four five six plus minus"
+    "seven eight nine equ equ"
+    "clear zero dot equ equ"
+    ;
+    gap: 2px;
+    margin-top: 30px;
+    border-radius: 5px;
+}
+
+input{
+    width: 94%;
+    grid-area: i;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 30px;
+    padding: 10px;
+    direction: rtl;
+}
+
+button{
+    border-radius: 5px;
+    font-size: large;
+    cursor: pointer;
+}
+
+button:hover:not(#equ){
+    background-color: aliceblue;
+}
+
+#equ{
+    background-color: rgb(255, 135, 91);
+}
+
+#equ:hover{
+    background-color: rgb(253, 114, 64);
+}
