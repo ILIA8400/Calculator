@@ -1,134 +1,80 @@
-const $ = document;
-const input = $.querySelector("input");
-let value = input.value;
+document.addEventListener("DOMContentLoaded", () => {
+    const $ = document;
+    const input = $.querySelector("input");
+    let value = "";
 
-let operator = "";
-let number =0;
-let result = 0;
-let newOperation = false;
+    let operator = "";
+    let number = 0;
+    let result = 0;
+    let newOperation = false;
 
+    const buttons = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+    buttons.forEach((button, index) => {
+        $.querySelector(`#${button}`).addEventListener("click", () => {
+            if (newOperation) {
+                value = "";
+                newOperation = false;
+            }
+            value += index;
+            input.value = value;
+        });
+    });
 
-$.querySelector("#zero").addEventListener("click",()=>{
-    value += 0;
-    input.value = value;
+    $.querySelector("#dot").addEventListener("click", () => {
+        if (!value.includes(".")) {
+            value += ".";
+            input.value = value;
+        }
+    });
+
+    $.querySelector("#clear").addEventListener("click", () => {
+        number = 0;
+        input.value = "";
+        value = "";
+        operator = "";
+        result = 0;
+    });
+
+    const operators = {
+        plus: "+",
+        minus: "-",
+        times: "*",
+        division: "/"
+    };
+
+    for (let op in operators) {
+        $.querySelector(`#${op}`).addEventListener("click", () => {
+            if (operator) {
+                calc();
+            } else {
+                number = parseFloat(value);
+            }
+            operator = op;
+            value = "";
+            input.value = operators[op];
+            newOperation = true;
+        });
+    }
+
+    $.querySelector("#equ").addEventListener("click", () => {
+        calc();
+        number = result;
+        input.value = result;
+        value = input.value;
+        operator = "";
+    });
+
+    function calc() {
+        if (operator == "plus")
+            result = number + parseFloat(value);
+        else if (operator == "minus")
+            result = number - parseFloat(value);
+        else if (operator == "times")
+            result = number * parseFloat(value);
+        else if (operator == "division")
+            result = number / parseFloat(value);
+
+        number = result;
+        newOperation = true;
+    }
 });
-
-$.querySelector("#one").addEventListener("click",()=>{
-    value += 1;
-    input.value = value;
-});
-
-$.querySelector("#two").addEventListener("click",()=>{
-    value += 2;
-    input.value = value;
-});
-
-$.querySelector("#three").addEventListener("click",()=>{
-    value += 3;
-    input.value = value;
-});
-
-$.querySelector("#four").addEventListener("click",()=>{
-    value += 4;
-    input.value = value;
-});
-
-$.querySelector("#five").addEventListener("click",()=>{
-    value += 5;
-    input.value = value;
-});
-
-$.querySelector("#six").addEventListener("click",()=>{
-    value += 6;
-    input.value = value;
-});
-
-$.querySelector("#seven").addEventListener("click",()=>{
-    value += 7;
-    input.value = value;
-});
-
-$.querySelector("#eight").addEventListener("click",()=>{
-    value += 8;
-    input.value = value;
-});
-
-$.querySelector("#nine").addEventListener("click",()=>{
-    value += 9;
-    input.value = value;
-});
-
-
-$.querySelector("#dot").addEventListener("click",()=>{
-    value += ".";
-    input.value = value;
-});
-
-//==========================================
-
-
-$.querySelector("#clear").addEventListener("click",()=>{
-    number = 0;
-    input.value = "";
-    value = input.value;
-});
-
-
-//=============================================
-
-
-$.querySelector("#plus").addEventListener("click",()=>{
-   
-    number = parseFloat(value);
-    operator = "plus";
-    value = "";
-    input.value = value;
-    
-});
-
-$.querySelector("#minus").addEventListener("click",()=>{
-    number = parseFloat(value);
-    operator = "minus";
-    value = "";
-    input.value = value;
-});
-
-$.querySelector("#times").addEventListener("click",()=>{
-    number = parseFloat(value);
-    operator = "times";
-    value = "";
-    input.value = value;
-});
-
-$.querySelector("#division").addEventListener("click",()=>{
-    number = parseFloat(value);
-    operator = "division";
-    value = "";
-    input.value = value;
-});
-
-$.querySelector("#equ").addEventListener("click",()=>{
-
-    calc();
-    number = 0;
-    input.value = result;
-    value = input.value;
-});
-
-
-//=============================
-
-
-function calc(){
-
-    if(operator == "plus")
-        result = parseFloat(input.value) + number;
-    else if(operator == "minus")
-        result = number - parseFloat(input.value);
-    else if(operator == "times")
-        result = number * parseFloat(input.value);
-    else if(operator == "division")
-        result = number / parseFloat(input.value);
-
-    operator = "";
-}
