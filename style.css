@@ -31,7 +31,9 @@ input{
     margin-bottom: 10px;
     font-size: 30px;
     padding: 10px;
-    direction: rtl;
+    text-align: right;
+    background-color: rgb(78, 78, 78);
+    color: white;
 }
 
 button{
